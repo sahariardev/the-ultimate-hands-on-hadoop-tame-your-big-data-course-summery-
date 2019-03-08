@@ -12,14 +12,14 @@ An open source software platform for distributed storage and distributed process
 + HDFS: Hadoop distributed file system. Primary distributed data storage used by Hadoop applications. 
 +  Yarn: Yet another resource negotiator. Yarn basically is the system that manages the resources on computing cluster. It decides what task to run when, what nodes are available for extra work, what nodes are down and so on.
 + Map Reduce: A programming model that allows us to process data across an entire cluster. It consist of mapper and reducers.
-+ Pig: Allow us to write sql code to chain together queries and get complex answers without writing python and java code.
-+ Hive: Similar to pig but make system look like a sql database.
++ Pig: It allows us to write sql code to chain together queries and get complex answers without writing python and java code.
++ Hive: Similar to pig but makes system look like a sql database.
 + Apache Ambari: Apache Ambari sits on top of everything and it gives us a view of cluster and let us visualize what's running on the cluster,what system and resources are being used. Hortonworks uses Amabari.
 + Apache Storm:  Storm is basically a way of processing streaming data. Spark Streaming is an alternative for Storm.
 + Oozie: Oozie is just a way of scheduling jobs on cluster.
 + Zookeeper: It is basically a technology for coordinating everything on the cluster. It used to keep track of which nodes are up and nodes are down.
-Flume : Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data. It has a simple and flexible architecture based on streaming data flows. 
-Sqoop : Sqoop is a tool designed to transfer data between Hadoop and relational database servers.
++Flume : Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data. It has a simple and flexible architecture based on streaming data flows. 
++Sqoop : Sqoop is a tool designed to transfer data between Hadoop and relational database servers.
 
 Mesos: An alternative to yarn.
 
