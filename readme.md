@@ -60,4 +60,8 @@ Delete file from HDFS
 ```
 hadoop fs -rm {filenamewithpath}
 ```	
+Delete folder from HDFS
+```
+hadoop fs -rmdir (foldername)
+
 
