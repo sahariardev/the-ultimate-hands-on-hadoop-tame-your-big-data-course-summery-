@@ -54,4 +54,8 @@ Copy file from local to HDFS
 ```
 hadoop fs -copyFromLocal {filenamewithpath} {newfilenamewithpath}
 ```	
+Delete file from HDFS
+```
+hadoop fs -rm {filenamewithpath}
+```	
 
