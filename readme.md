@@ -17,7 +17,9 @@ An open source software platform for distributed storage and distributed process
 + Apache Ambari: Apache Ambari sits on top of everything and it gives us a view of cluster and let us visualize what's running on the cluster,what system and resources are being used. Hortonworks uses Amabari.
 + Apache Storm:  Storm is basically a way of processing streaming data. Spark Streaming is an alternative for Storm.
 + Oozie: Oozie is just a way of scheduling jobs on cluster.
-+ Zookeeper: It is basically a technology for coordinating everything on the cluster. It used to keep track of which nodes are up and nodes are down. 
++ Zookeeper: It is basically a technology for coordinating everything on the cluster. It used to keep track of which nodes are up and nodes are down.
+Flume : Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data. It has a simple and flexible architecture based on streaming data flows. 
+Sqoop : Sqoop is a tool designed to transfer data between Hadoop and relational database servers.
 
 Mesos: An alternative to yarn.
 
