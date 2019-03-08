@@ -20,5 +20,21 @@ An open source software platform for distributed storage and distributed process
 + Zookeeper: It is basically a technology for coordinating everything on the cluster. It used to keep track of which nodes are up and nodes are down. 
 
 Mesos: An alternative to yarn.
-   
+
+---
+
+   ```
+   Section 02
+  ```
+ #### HDFS
+  When data size become so large that it outgrows the storage capacity of a single machine, it becomes necessary to partition it across a number of separate machines. The file system that manages the storage across a network  of machines is called  distributed file system. Developing a distributed file system is more complex than a regular disk filesystem. Hadoop provides us a Distributed file system known a HDFS. When we give a file HDFS is breaks it into a chunk of small files and store it in several machines. They always keep multiple copies of files so that file can be easily recovered when any machine goes down.
+#### HDFS Architecture
+
+
+
+An HDFS cluster has two types of node. They operate in master-worker patter. 
+Namenode: The name node manages the file system namespace. It maintains the filesystem tree and the metadata for all the files and directories in the tree. This information is stored persistently on the local disk in the form of two files 1. the namespace image and  2. the edit log. The namenode also knows the datanodes on which all the blocks for a given file are located; however, it does not store block locations persistently, because this information is reconstructed from datanodes when the system starts. 
+Datanode: Datanodes are the workhorses of the filesystem. They store and retrieve blocks when they are told to (by clients or the namenode), and they report back to the namenode periodically with lists of blocks that they are storing.
+As the namenode has all the informations of datanodes so without name nodedata can not be accessed. So if namenode fails then the whole system fails. So most of the team make a backup of namenode. But making namenode backup slowdown the process of storing data because when the data is stored it needs to be informed to multiple namenodes.
+
 
