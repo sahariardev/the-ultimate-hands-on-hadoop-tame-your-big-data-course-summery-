@@ -36,5 +36,22 @@ An HDFS cluster has two types of node. They operate in master-worker patter.
 Namenode: The name node manages the file system namespace. It maintains the filesystem tree and the metadata for all the files and directories in the tree. This information is stored persistently on the local disk in the form of two files 1. the namespace image and  2. the edit log. The namenode also knows the datanodes on which all the blocks for a given file are located; however, it does not store block locations persistently, because this information is reconstructed from datanodes when the system starts. 
 Datanode: Datanodes are the workhorses of the filesystem. They store and retrieve blocks when they are told to (by clients or the namenode), and they report back to the namenode periodically with lists of blocks that they are storing.
 As the namenode has all the informations of datanodes so without name nodedata can not be accessed. So if namenode fails then the whole system fails. So most of the team make a backup of namenode. But making namenode backup slowdown the process of storing data because when the data is stored it needs to be informed to multiple namenodes.
-
+### Accessing HDFS using Command Line(In Hortonworks)
+Connect using SSH:
+```
+ssh username@ipaddress -p port
+password
+```
+List all files in HDFS:
+```
+hadoop fs -ls
+```
+Create a folder in HDFS:
+```
+hadoop fs -mkdir {folder_name}
+```
+Copy file from local to HDFS
+```
+hadoop fs -copyFromLocal {filenamewithpath} {newfilenamewithpath}
+```	
 
