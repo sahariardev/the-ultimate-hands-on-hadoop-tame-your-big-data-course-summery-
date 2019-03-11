@@ -1,3 +1,4 @@
+
 ## The ultimate hands on hadoop tame your big data(Course Handson and Summery)
 ```
 Section 01
@@ -19,7 +20,7 @@ An open source software platform for distributed storage and distributed process
 + Oozie: Oozie is just a way of scheduling jobs on cluster.
 + Zookeeper: It is basically a technology for coordinating everything on the cluster. It used to keep track of which nodes are up and nodes are down.
 + Flume : Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of log data. It has a simple and flexible architecture based on streaming data flows. 
-+ Sqoop : Sqoop is a tool designed to transfer data between Hadoop and relational database servers.
++ Sqoop : Sqoop is a tool designed to transfer data between Hadoop and relational database servers.
 
 Mesos: An alternative to yarn.
 
@@ -62,6 +63,96 @@ hadoop fs -rm {filenamewithpath}
 ```	
 Delete folder from HDFS
 ```
-hadoop fs -rmdir (foldername)
+hadoop fs -rmdir {foldername}
+```
+MapReduce
+```
+MapReduce is a processing technique and a program model for distributed computing based on java. The MapReduce algorithm contains two important tasks, namely Map and Reduce. Map takes a set of data and converts it into another set of data, where individual elements are broken down into tuples (key/value pairs). Secondly, reduce task, which takes the output from a map as an input and combines those data tuples into a smaller set of tuples. As the sequence of the name MapReduce implies, the reduce task is always performed after the map job.
+```
++ MapReduce is natively java
++ Streaming allows interfacing to other language
+
+Install Environment inside HDP 2.5
++ PIP
+```
+cd /etc/yum.repos.d
+cp sandbox.repo /tmp
+rm sandbox.repo
+cd ~
+yum install python-pip
+```
++ MRJob
+```
+pip install google-api-python-client==1.6.4
+pip install mrjob==0.5.11
+```
++ Nano
+```
+yum install nano
+```
+
+MapReduce Example in Python(2.6)
+
+Problem: Find the number of movies of each rating(rating frequency) from movie data set
++ Data Set definition
+```
+UserID MovieID Rating   TimeStamp
+196	242	3	881250949
+186	302	3	891717742
+22	377	1	878887116
+244	51	2	880606923
+166	346	1	886397596
+298	474	4	884182806
+```
+Code
+```Python
+from mrjob.job import MRJob
+from mrjob.step import MRStep
+
+class RatingsBreakdown(MRJob):
+    def steps(self):
+        return [
+            MRStep(mapper=self.mapper_get_ratings,
+                   reducer=self.reducer_count_ratings)
+        ]
+    #Mapper
+    def mapper_get_ratings(self, _, line):
+        (userID, movieID, rating, timestamp) = line.split('\t')
+        yield rating, 1
+    #Reducer
+    def reducer_count_ratings(self, key, values):
+        yield key, sum(values)
+
+if __name__ == '__main__':
+    RatingsBreakdown.run()
+```
+Problem: Find the Movie Popularity list
+Data Set: Same data set used here as previous.
+```Python
+from mrjob.job import MRJob
+from mrjob.step import MRStep
+
+class PopularMoviesList(MRJob):
+    def steps(self):
+        return [
+            MRStep(mapper=self.mapper_get_movies,
+                   reducer=self.reducer_count_movies),
+            MRStep(reducer=self.final_reducer)       
+        ]
+
+    def mapper_get_movies(self, _, line):
+        (userID, movieID, rating, timestamp) = line.split('\t')
+        yield movieID, 1
+
+    def reducer_count_movies(self, key, values):
+        yield str(sum(values)).zfill(5),key
+    def final_reducer(self,count,movies):
+	for movie in movies:
+	    yield movie, count
+
+if __name__ == '__main__':
+    PopularMoviesList.run()
+```
+
 
 
