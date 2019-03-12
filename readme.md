@@ -154,5 +154,24 @@ if __name__ == '__main__':
     PopularMoviesList.run()
 ```
 
+```
+Section 03
+```
+PIG Code Example On Movie dataSet
+Problem: Find Oldest Five Star Movies
+```SQL
+ratings=LOAD '/user/maria_dev/ml-100k/u.data' AS (userID:int,movieID:int,rating:int,ratingTime:int);
+metadata=LOAD '/user/maria_dev/ml-100k/u.item'  USING PigStorage('|') 
+   AS (movieID:int, movieTitle:chararray,releaseDate:chararray,videoRelease:chararray,imdbLink:chararray);
+nameLookup=FOREACH metadata GENERATE movieID, movieTitle, ToUniXTime(ToDate(releaseDate,'dd-MMM-yyyy')) 
+AS releaseTime;
+ratingsByMovie = GROUP ratings by movieID;
+avgRatings=FOREACH ratingsMovie GENERATE group AS movieID, AVG(ratings.rating) as avgRating;
 
+fiveStarMovies=FILTER avgRatings by avgRating >4.0 ;
 
+fiveStarsWithData = JOIN fiveStarMovies BY movieID, nameLookup By movieID;
+oldestFiveStarMovies= ORDER fiveStarsWithData BY nameLookup :: releaseTime;
+
+DUMP oldestFiveStarMovies;
+```
