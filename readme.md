@@ -56,6 +56,7 @@ hadoop fs -mkdir {folder_name}
 Copy file from local to HDFS
 ```
 hadoop fs -copyFromLocal {filenamewithpath} {newfilenamewithpath}
+hadoop fs -put {filenamewithpath} {newfilenamewithpath}
 ```	
 Delete file from HDFS
 ```
